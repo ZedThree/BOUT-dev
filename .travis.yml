@@ -8,5 +8,7 @@ before_install:
   - sudo apt-get install -y libfftw3-dev libnetcdf-dev
   - sudo apt-get install -y python-numpy python-netcdf python-scipy
   - sudo apt-get install -y python-matplotlib
+  - grep H5Eset_auto /usr/include/H5Epublic.h
+  - grep H5Dopen /usr/include/H5Dpublic.h
 script:
-  - ./configure --with-hdf5 && make && ./.travis_script.sh
+  - CFLAGS=-DH5_NO_DEPRECATED_SYMBOLS ./configure --with-hdf5 && make && ./.travis_script.sh
