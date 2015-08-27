@@ -3,12 +3,8 @@ compiler: gcc
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y mpich2 libmpich2-dev
-  - sudo apt-get install -y libhdf5-mpich-dev libhdf5-mpich-1.8.4
-  - sudo apt-get install -y hdf5-tools
   - sudo apt-get install -y libfftw3-dev libnetcdf-dev
   - sudo apt-get install -y python-numpy python-netcdf python-scipy
   - sudo apt-get install -y python-matplotlib
-  - grep H5Eset_auto /usr/include/H5Epublic.h
-  - grep H5Dopen /usr/include/H5Dpublic.h
 script:
-  - ./configure CXXFLAGS=-DH5_NO_DEPRECATED_SYMBOLS --with-hdf5 && make && ./.travis_script.sh
+  - ./configure && make && ./.travis_script.sh
