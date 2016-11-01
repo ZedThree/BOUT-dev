@@ -41,7 +41,7 @@ before_install:
   ########################################
   - |
     NETCDF_URL="https://github.com/Unidata/netcdf-cxx4/archive/v4.3.0.tar.gz"
-    { travis_retry wget --quiet -O - ${NETCDF_URL} | tar -x; } || exit 1
+    { travis_retry wget --quiet -O - ${NETCDF_URL} | tar -xz; } || exit 1
     cd netcdf-cxx4-4.3.0
     ./configure --prefix $HOME/miniconda/envs/test-environment
     make -j && make install
