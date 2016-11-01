@@ -44,7 +44,7 @@ before_install:
     NETCDF_URL="https://github.com/Unidata/netcdf-cxx4/archive/v4.3.0.tar.gz"
     { travis_retry wget --quiet -O - ${NETCDF_URL} | tar -xz; } || exit 1
     cd netcdf-cxx4-4.3.0
-    ./configure --prefix $HOME/miniconda/envs/test-environment CPPFLAGS=$(nc-config --cflags)
+    ./configure --prefix $HOME/miniconda/envs/test-environment CPPFLAGS=$(nc-config --cflags) LDFLAGS=$(nc-config --prefix)/lib
     make -j && make install
 script:
   - ./.travis_script.sh
