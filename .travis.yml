@@ -18,7 +18,7 @@ matrix:
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
-  - sudo apt-get install -y openmpi libopenmpi-dev
+  - sudo apt-get install -y openmpi-bin libopenmpi-dev
   - sudo apt-get install -y libfftw3-dev libnetcdf-dev libhdf5-serial-dev netcdf-bin hdf5-tools
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
