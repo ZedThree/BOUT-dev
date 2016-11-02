@@ -361,14 +361,14 @@ AS_IF([test "x$with_netcdf" != "xno"],
              #include <netcdfcpp.h>
              ], [NcFile file("foo.nc");])],
           [AC_MSG_RESULT([yes])
-           CXXFLAGS="$CXXFLAGS -DNCDF"
            echo " -> NetCDF support enabled"],
           [AC_MSG_RESULT([no])
            AC_MSG_FAILURE([Could not compile NetCDF C++ program!])])
         AC_LANG_POP([C++])
-        CXXFLAGS=$save_CXXFLAGS
+        LIBS=$save_LIBS
         LDFLAGS=$save_LDFLAGS
        ])
+      CXXFLAGS="$CXXFLAGS -DNCDF"
       EXTRA_LIBS="$EXTRA_LIBS $NCLIB"
 
       file_formats="$file_formats netCDF"
