@@ -1,5 +1,5 @@
 #!/bin/bash
-./configure $CONFIGURE_OPTIONS
+./configure --with-netcdf=/usr/bin/nc-config $CONFIGURE_OPTIONS
 conf=$?
 if test $conf -gt 0
 then
