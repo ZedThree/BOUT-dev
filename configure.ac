@@ -351,10 +351,10 @@ AS_IF([test "x$with_netcdf" != "xno"],
         # Note netcdf_c++ needed
         NCLIB=`$NCCONF --libs | sed s/-lnetcdf/-lnetcdf_c++\ -lnetcdf/`
 
-        save_CXXFLAGS=$CXXFLAGS
+        save_LIBS=$LIBS
         save_LDFLAGS=$LDFLAGS
         AC_LANG_PUSH([C++])
-        CXXFLAGS="$save_CXXFLAGS $NCLIB"
+        LIBS="$save_LIBS $NCLIB"
         LDFALGS="save_LDFLAGS $NCINC"
         AC_LINK_IFELSE(
           [AC_LANG_PROGRAM([
