@@ -24,14 +24,4 @@ jobs:
           # Googletest triggers a _lot_ of clang-tidy warnings, so ignore all
           # the unit tests until they're fixed or ignored upstream
           exclude: "tests/unit/*cxx"
-          cmake_command: |
-            cmake . -B build -DBUILD_SHARED_LIBS=ON \
-                           -DBOUT_ENABLE_OPENMP=ON \
-                           -DBOUT_USE_PETSC=ON \
-                           -DBOUT_USE_SLEPC=ON \
-                           -DBOUT_USE_HDF5=ON \
-                           -DBOUT_USE_SUNDIALS=ON \
-                           -DBOUT_BUILD_EXAMPLES=ON \
-                           -DBOUT_BUILD_DOCS=OFF \
-                           -DCMAKE_EXPORT_COMPILE_COMMANDS=On
-
+          cmake_command: "cmake . -B build -DBUILD_SHARED_LIBS=ON -DBOUT_ENABLE_OPENMP=ON -DBOUT_USE_PETSC=ON -DBOUT_USE_SLEPC=ON -DBOUT_USE_HDF5=ON -DBOUT_USE_SUNDIALS=ON -DBOUT_BUILD_EXAMPLES=ON -DBOUT_BUILD_DOCS=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=On"
