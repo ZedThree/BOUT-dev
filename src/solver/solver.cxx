@@ -1348,22 +1348,22 @@ void Solver::pre_rhs(BoutReal t) {
 
 void Solver::post_rhs(BoutReal UNUSED(t)) {
 #if CHECK > 0
-  for(const auto& f : f3d) {
-    if(!f.F_var->isAllocated())
+  for (const auto& f : f3d) {
+    if (!f.F_var->isAllocated())
       throw BoutException(_("Time derivative for variable '%s' not set"), f.name.c_str());
   }
 #endif
   // Make sure vectors in correct basis
-  for(const auto& v : v2d) {
-    if(v.covariant) {
+  for (const auto& v : v2d) {
+    if (v.covariant) {
       v.F_var->toCovariant();
-    }else
+    } else
       v.F_var->toContravariant();
   }
-  for(const auto& v : v3d) {
-    if(v.covariant) {
+  for (const auto& v : v3d) {
+    if (v.covariant) {
       v.F_var->toCovariant();
-    }else
+    } else
       v.F_var->toContravariant();
   }
 
@@ -1373,19 +1373,20 @@ void Solver::post_rhs(BoutReal UNUSED(t)) {
   }
 
   // Apply boundary conditions to the time-derivatives
-  for(const auto& f : f2d) {
-    if(!f.constraint && f.evolve_bndry) // If it's not a constraint and if the boundary is evolving
+  for (const auto& f : f2d) {
+    if (!f.constraint
+        && f.evolve_bndry) // If it's not a constraint and if the boundary is evolving
       f.var->applyTDerivBoundary();
   }
-  
-  for(const auto& f : f3d) {
-    if(!f.constraint && f.evolve_bndry)
+
+  for (const auto& f : f3d) {
+    if (!f.constraint && f.evolve_bndry)
       f.var->applyTDerivBoundary();
   }
 #if CHECK > 2
   {
     TRACE("Solver checking time derivatives");
-    for(const auto& f : f3d) {
+    for (const auto& f : f3d) {
       TRACE("Variable: %s", f.name.c_str());
       checkData(*f.F_var);
     }
