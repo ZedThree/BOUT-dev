@@ -32,42 +32,6 @@ static PetscErrorCode FormFunction(SNES UNUSED(snes), Vec x, Vec f, void* ctx) {
  *
  * This function can be a linearised form of FormFunction
  */
-#undef __FUNCT__
-#define __FUNCT__ "FormFunctionForDifferencing"
-static PetscErrorCode FormFunctionForDifferencing(void* ctx, Vec x, Vec f) {
-  return static_cast<SNESSolver*>(ctx)->snes_function(x, f, true);
-}
-
-/*!
- * SNES callback for forming Jacobian with coloring
- *
- * This can be a linearised and simplified form of FormFunction
- */
-#undef __FUNCT__
-#define __FUNCT__ "FormFunctionForColoring"
-static PetscErrorCode FormFunctionForColoring(SNES UNUSED(snes), Vec x, Vec f,
-                                              void* ctx) {
-  return static_cast<SNESSolver*>(ctx)->snes_function(x, f, true);
-}
-
-#undef __FUNCT__
-#define __FUNCT__ "snesPCapply"
-static PetscErrorCode snesPCapply(PC pc, Vec x, Vec y) {
-  int ierr;
-
-  // Get the context
-  SNESSolver* s;
-  ierr = PCShellGetContext(pc, reinterpret_cast<void**>(&s));
-  CHKERRQ(ierr);
-
-  PetscFunctionReturn(s->precon(x, y));
-}
-
-/*!
- * PETSc callback function for forming Jacobian
- *
- * This function can be a linearised form of FormFunction
- */
 static PetscErrorCode FormFunctionForDifferencing(void* ctx, Vec x, Vec f) {
   return static_cast<SNESSolver*>(ctx)->snes_function(x, f, true);
 }
