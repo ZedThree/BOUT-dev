@@ -18,9 +18,9 @@ jobs:
         id: review
         with:
           build_dir: build
-          apt_packages: "libfftw3-dev,libnetcdf-c++4-dev,libopenmpi-dev,liblapack-dev,libparpack2-dev,uuid-dev"
+          apt_packages: "libfftw3-dev,libnetcdf-c++4-dev,libopenmpi-dev,liblapack-dev,petsc-dev,slepc-dev,libparpack2-dev,libsundials-dev,uuid-dev"
           config_file: ".clang-tidy"
           # Googletest triggers a _lot_ of clang-tidy warnings, so ignore all
           # the unit tests until they're fixed or ignored upstream
           exclude: "tests/unit/*cxx"
-          cmake_command: "cmake . -B build -DBUILD_SHARED_LIBS=ON -DBOUT_BUILD_EXAMPLES=ON -DBOUT_BUILD_DOCS=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DBOUT_ENABLE_PYTHON=off"
+          cmake_command: "cmake . -B build -DBUILD_SHARED_LIBS=ON -DBOUT_USE_PETSC=ON -DBOUT_USE_SLEPC=ON -DBOUT_USE_SUNDIALS=ON -DBOUT_BUILD_EXAMPLES=ON -DBOUT_BUILD_DOCS=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DBOUT_ENABLE_PYTHON=off -DPETSC_DIR=/usr/lib/petscdir/3.12/x86_64-linux-gnu-real -DSLEPC_DIR=/usr/lib/slepcdir/3.12/x86_64-linux-gnu-real"
