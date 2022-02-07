@@ -32,6 +32,7 @@ jobs:
                  liblapack-dev
                  libparpack2-dev
                  libsundials-dev
+                 ca-certificates
 
       - uses: actions/checkout@v2
         with:
@@ -41,7 +42,6 @@ jobs:
         run: |
           cmake --version
           cmake . -B build -DBUILD_SHARED_LIBS=ON \
-                           -DBOUT_ENABLE_OPENMP=ON \
                            -DBOUT_USE_PETSC=ON \
                            -DBOUT_USE_SLEPC=ON \
                            -DBOUT_USE_SUNDIALS=ON \
