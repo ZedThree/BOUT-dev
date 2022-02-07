@@ -65,4 +65,4 @@ jobs:
           # Googletest triggers a _lot_ of clang-tidy warnings, so ignore all
           # the unit tests until they're fixed or ignored upstream
           exclude: "tests/unit/*cxx"
-          base_dir: ${{ env.cwd }}
+          base_dir: ${{ env.PWD }}
