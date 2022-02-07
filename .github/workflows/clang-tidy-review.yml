@@ -50,6 +50,11 @@ jobs:
                            -DBOUT_ENABLE_PYTHON=OFF \
                            -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 
+      - name: Set CWD
+        run: |
+          env | grep PWD
+          echo "cwd=$(pwd)" >> $GITHUB_ENV
+
       - name: Run clang-tidy
         uses: ZedThree/clang-tidy-review@fix-absolute-paths
         id: review
@@ -60,3 +65,4 @@ jobs:
           # Googletest triggers a _lot_ of clang-tidy warnings, so ignore all
           # the unit tests until they're fixed or ignored upstream
           exclude: "tests/unit/*cxx"
+          base_dir: ${{ env.cwd }}
