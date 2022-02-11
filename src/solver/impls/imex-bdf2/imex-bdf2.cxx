@@ -71,7 +71,7 @@ static PetscErrorCode imexbdf2PCapply(PC pc,Vec x,Vec y) {
   int ierr;
 
   // Get the context
-  IMEXBDF2* s;
+  IMEXBDF2* s = nullptr;
   ierr = PCShellGetContext(pc, reinterpret_cast<void**>(&s));
   CHKERRQ(ierr);
 
@@ -727,11 +727,11 @@ void IMEXBDF2::constructSNES(SNES* snesIn) {
 
   if (diagnose) {
     // Some reporting
-    PCType pctype;
+    PCType pctype = nullptr;
     PCGetType(pc, &pctype);
-    KSPType ksptype;
+    KSPType ksptype = nullptr;
     KSPGetType(ksp, &ksptype);
-    SNESType snestype;
+    SNESType snestype = nullptr;
     SNESGetType(*snesIn, &snestype);
     output << "SNES Type : " << snestype << endl;
     output << "KSP Type : " << ksptype << endl;
@@ -1168,7 +1168,7 @@ PetscErrorCode IMEXBDF2::solve_implicit(BoutReal curtime, BoutReal gamma) {
   implicit_gamma = gamma;
 
   // Set initial guess at the solution
-  BoutReal* xdata;
+  BoutReal* xdata = nullptr;
   int ierr;
   ierr = VecGetArray(snes_x, &xdata);
   CHKERRQ(ierr);
@@ -1257,8 +1257,8 @@ PetscErrorCode IMEXBDF2::solve_implicit(BoutReal curtime, BoutReal gamma) {
 
 // f = (x - gamma*G(x)) - rhs
 PetscErrorCode IMEXBDF2::snes_function(Vec x, Vec f, bool linear) {
-  const BoutReal* xdata;
-  BoutReal* fdata;
+  const BoutReal* xdata = nullptr;
+  BoutReal* fdata = nullptr;
   int ierr;
 
   // Get data from PETSc into BOUT++ fields
@@ -1325,7 +1325,7 @@ PetscErrorCode IMEXBDF2::precon(Vec x, Vec f) {
   CHKERRQ(ierr);
 
   // Load vector to be inverted into ddt() variables
-  const BoutReal* xdata;
+  const BoutReal* xdata = nullptr;
   ierr = VecGetArrayRead(x, &xdata);
   CHKERRQ(ierr);
   load_derivs(const_cast<BoutReal*>(xdata)); // Note: load_derivs does not modify data
