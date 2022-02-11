@@ -14,7 +14,7 @@ jobs:
         run: |
           cmake --version
       - name: Run clang-tidy
-        uses: ZedThree/clang-tidy-review@suggest-fixits
+        uses: ZedThree/clang-tidy-review@fix-position-keyerror
         id: review
         with:
           build_dir: build
