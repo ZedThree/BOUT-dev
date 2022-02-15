@@ -207,17 +207,12 @@ private:
  */
 int BoutFinalise(bool write_settings = true);
 
-namespace bout {   struct BoutSim {
-    BoutSim(int& argc, char**& argv) {
-      BoutInitialise(argc,   argv);
-    }
-    ~BoutSim() 
- {
-   BoutFinalise();}
-      
-  };
+namespace bout {
+struct BoutSim {
+  BoutSim(int& argc, char**& argv) { BoutInitialise(argc, argv); }
+  ~BoutSim() { BoutFinalise(); }
+};
 
-  
-}
+} // namespace bout
 
 #endif // __BOUT_H__
