@@ -1,10 +1,6 @@
 name: clang-tidy-review
 
-on:
-  pull_request:
-    paths:
-      - '**.cxx'
-      - '**.hxx'
+on: pull_request
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,12 +10,16 @@ jobs:
   review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: true
 
+      - name: Set the GITHUB_WORKSPACE as a safe directory
+        # Fix for: https://github.com/actions/checkout/issues/766 (git CVE-2022-24765)
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Run clang-tidy
-        uses: ZedThree/clang-tidy-review@v0.8.3
+        uses: ZedThree/clang-tidy-review@v0.8.4
         id: review
         with:
           build_dir: build
@@ -30,7 +30,6 @@ jobs:
           exclude: "tests/unit/*cxx"
           cmake_command: |
             cmake . -B build -DBUILD_SHARED_LIBS=ON \
-                             -DBOUT_ENABLE_OPENMP=ON \
                              -DBOUT_USE_PETSC=ON \
                              -DBOUT_USE_SLEPC=ON \
                              -DBOUT_USE_SUNDIALS=ON \
