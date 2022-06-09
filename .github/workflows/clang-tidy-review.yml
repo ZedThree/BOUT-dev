@@ -14,9 +14,6 @@ jobs:
         with:
           submodules: true
 
-      - name: current directory
-        run: pwd
-
       - name: Run clang-tidy
         uses: ZedThree/clang-tidy-review@v0.8.4
         id: review
@@ -28,8 +25,7 @@ jobs:
           # the unit tests until they're fixed or ignored upstream
           exclude: "tests/unit/*cxx"
           cmake_command: |
-            pwd &&
-            git config --global --add safe.directory /github/workspace &&
+            git config --global --add safe.directory * &&
             cmake . -B build -DBUILD_SHARED_LIBS=ON \
                              -DBOUT_USE_PETSC=ON \
                              -DBOUT_USE_SLEPC=ON \
