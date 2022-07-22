@@ -139,7 +139,7 @@ int BoutInitialise(int& argc, char**& argv) {
   CommandLineArgs args;
   try {
     args = parseCommandLineArgs(argc, argv);
-  } catch (const BoutException& e) {
+  } catch (BoutException e) {
     output_error << _("Bad command line arguments:\n") << e.what() << std::endl;
     return 1;
   }
@@ -167,7 +167,7 @@ int BoutInitialise(int& argc, char**& argv) {
     printCommandLineArguments(args.original_argv);
 
     // Load settings file
-    OptionsReader* reader = OptionsReader::getInstance();
+    auto reader = OptionsReader::getInstance();
     // Ideally we'd use the long options for `datadir` and
     // `optionfile` here, but we'd need to call parseCommandLine
     // _first_ in order to do that and set the source, etc., but we
