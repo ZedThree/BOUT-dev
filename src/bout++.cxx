@@ -143,7 +143,7 @@ int BoutInitialise(int& argc, char**& argv) {
   CommandLineArgs args;
   try {
     args = parseCommandLineArgs(argc, argv);
-  } catch (const BoutException& e) {
+  } catch (BoutException& e) {
     output_error << _("Bad command line arguments:\n") << e.what() << std::endl;
     return 1;
   }
